@@ -51,3 +51,6 @@ export LDFLAGS="-L/usr/local/opt/zlib/lib"
 export CPPFLAGS="-I/usr/local/opt/zlib/include"
 
 #set -g fish_user_paths "/usr/local/opt/bzip2/bin" $fish_user_paths
+
+#export LDFLAGS="-L/usr/local/opt/bzip2/lib"
+#export CPPFLAGS="-I/usr/local/opt/bzip2/include"
