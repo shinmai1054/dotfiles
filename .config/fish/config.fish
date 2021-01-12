@@ -2,9 +2,9 @@
 
 set EDITOR emacs
 
-if test (uname)='Darwin'
+if [ (uname) = 'Darwin' ]
    alias ls 'ls -G -F'
-else if test (uname)='Linux'
+else if [ (uname) = 'Linux' ]
    alias ls 'ls -F --color=auto'
 end
 
