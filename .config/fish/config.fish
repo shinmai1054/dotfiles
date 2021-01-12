@@ -2,10 +2,15 @@
 
 set EDITOR emacs
 
+if test (uname)='Darwin'
+   alias ls 'ls -G -F'
+else if test (uname)='Linux'
+   alias ls 'ls -F --color=auto'
+end
+
 alias l 'ls -a'
 alias ll 'ls -ltr'
 alias la 'ls -la'
-alias ls 'ls -G -F --color=auto'
 alias ltr 'ls -ltr'
 
 alias grep 'grep --color'
