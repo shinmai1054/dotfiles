@@ -1,6 +1,6 @@
 # config.fish
 
-set -x EDITOR nano
+set EDITOR emacs
 
 alias l 'ls -a'
 alias ll 'ls -ltr'
@@ -33,8 +33,11 @@ function reload
 end
 
 # pyenv
-# set PATH $HOME/.pyenv/shims $PATH
-eval (pyenv init - | source)
+if test -d ~/.pyenv/bin
+   set PATH $HOME/.pyenv/bin $PATH
+end
+
+type -q pyenv; and eval (pyenv init - | source)
 
 # cd and ls
 function cd
