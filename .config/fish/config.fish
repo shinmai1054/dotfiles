@@ -5,7 +5,7 @@ set EDITOR emacs
 alias l 'ls -a'
 alias ll 'ls -ltr'
 alias la 'ls -la'
-alias ls 'ls -G -F'
+alias ls 'ls -G -F --color=auto'
 alias ltr 'ls -ltr'
 
 alias grep 'grep --color'
