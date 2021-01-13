@@ -1,12 +1,26 @@
 ;; ~/.emacs.d/init.el
 
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(package-selected-packages '(highlight-indent-guides zenburn-theme rainbow-delimiters)))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )
+
 
 (require 'package)
 
 ;; インストールするパッケージ
 (setq package-list
       '(zenburn-theme
-	rainbow-delimiters))
+	rainbow-delimiters
+	highlight-indent-guides))
 
 ;; package-archivesを上書き
 (setq package-archives
@@ -82,7 +96,34 @@
 (set-face-foreground 'rainbow-delimiters-depth-8-face "#afafaf")
 (set-face-foreground 'rainbow-delimiters-depth-9-face "#f0f0f0")
 
-;; 使いたいモードはお好みで
-(add-hook 'emacs-lisp-mode-hook 'rainbow-delimiters-mode)
-(add-hook 'c-mode-hook 'rainbow-delimiters-mode)
+;; prog-mode で有効にする
+(add-hook 'prog-mode-hook 'rainbow-delimiters-mode)
+
+
+;; バックアップファイルをまとめる
+(setq backup-directory-alist '((".*" . "~/.emacs.d/backups")))
+;; 番号付けによる複数保存
+(setq version-control     t)  ;; 実行の有無
+(setq kept-new-versions   5)  ;; 最新の保持数
+(setq kept-old-versions   1)  ;; 最古の保持数
+(setq delete-old-versions t)  ;; 範囲外を削除
+
+;; 自動保存ファイルをまとめる
+(setq auto-save-file-name-transforms   '((".*" "~/.emacs.d/temp" t)))
+;; 保存の間隔
+(setq auto-save-timeout 10)     ;; 秒   (デフォルト : 30)
+(setq auto-save-interval 100)   ;; 打鍵 (デフォルト : 300)
+
+
+;; インデントを強調表示する
+(require 'highlight-indent-guides)
+(add-hook 'prog-mode-hook 'highlight-indent-guides-mode)
+(add-hook 'yaml-mode-hook 'highlight-indent-guides-mode)
+(add-hook 'text-mode-hook 'highlight-indent-guides-mode)
+
+(setq highlight-indent-guides-auto-enabled nil)
+(setq highlight-indent-guides-method 'character)
+(setq highlight-indent-guides-responsive t)
+;;(setq highlight-indent-guides-character ?\|)
+
 
