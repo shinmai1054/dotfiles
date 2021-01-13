@@ -44,7 +44,9 @@
 
 ;; Theme
 (load-theme 'zenburn t)
-(set-face-background 'default "unspecified-bg")
+(if (null window-system)
+  (set-face-background 'default "unspecified-bg")
+)
 
 
 ;; display line numbers
@@ -126,4 +128,26 @@
 (setq highlight-indent-guides-responsive t)
 ;;(setq highlight-indent-guides-character ?\|)
 
+;; 起動時の画面を表示しない
+(setq inhibit-startup-message t)
 
+;; インデントTAB文字を使わない（空白文字を使う）
+(setq-default indent-tabs-mode nil)
+
+;; C-kで改行文字も削除
+(setq kill-whole-line t)
+
+;; 保存時に自動で行末にある無駄な空白を削除
+(add-hook 'before-save-hook 'delete-trailing-whitespace)
+
+;; iswitchbを使う（C-xbによるバッファ選択が進化）
+(iswitchb-mode 1)
+;; iswitchbの際に無視するバッファリスト
+(setq iswitchb-buffer-ignore (append iswitchb-buffer-ignore '("*Messages*" "*scratch*" "*Completions*" "*Kill Ring*")))
+
+;; C-aで行の本当に先頭ではなく，行の非空白文字の先頭へ
+(defun back-to-indentation-or-beginning ()
+  (interactive)
+  (if (= (point) (save-excursion (back-to-indentation) (point)))
+    (beginning-of-line) (back-to-indentation)))
+(global-set-key "\C-a" 'back-to-indentation-or-beginning)
