@@ -1,11 +1,16 @@
 # config.fish
 
-set -x EDITOR nano
+set EDITOR emacs
+
+if [ (uname) = 'Darwin' ]
+   alias ls 'ls -G -F'
+else if [ (uname) = 'Linux' ]
+   alias ls 'ls -F --color=auto'
+end
 
 alias l 'ls -a'
 alias ll 'ls -ltr'
 alias la 'ls -la'
-alias ls 'ls -G -F'
 alias ltr 'ls -ltr'
 
 alias grep 'grep --color'
@@ -33,8 +38,11 @@ function reload
 end
 
 # pyenv
-# set PATH $HOME/.pyenv/shims $PATH
-eval (pyenv init - | source)
+if test -d ~/.pyenv/bin
+   set PATH $HOME/.pyenv/bin $PATH
+end
+
+type -q pyenv; and eval (pyenv init - | source)
 
 # cd and ls
 function cd
@@ -51,3 +59,6 @@ export LDFLAGS="-L/usr/local/opt/zlib/lib"
 export CPPFLAGS="-I/usr/local/opt/zlib/include"
 
 #set -g fish_user_paths "/usr/local/opt/bzip2/bin" $fish_user_paths
+
+#export LDFLAGS="-L/usr/local/opt/bzip2/lib"
+#export CPPFLAGS="-I/usr/local/opt/bzip2/include"
