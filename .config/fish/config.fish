@@ -33,13 +33,15 @@ alias ... 'cd ../..'
 alias .... 'cd ../../..'
 alias ..... 'cd ../../../..'
 
+alias oc 'sudo openconnect --config=$HOME/openconnect/config v-conn.nagasaki-u.ac.jp'
+
 function reload
   source ~/.config/fish/config.fish
 end
 
 # pyenv
 if test -d ~/.pyenv/bin
-   set PATH $HOME/.pyenv/bin $PATH
+   fish_add_path $HOME/.pyenv/bin
 end
 
 type -q pyenv; and eval (pyenv init - | source)
@@ -53,12 +55,8 @@ end
 set -g theme_show_exit_status yes
 set -g theme_title_display_process yes
 set -g theme_date_format "+%m/%d %H:%M:%S"
-#set -g fish_user_paths "/usr/local/opt/openssl@1.1/bin" $fish_user_paths
 
-export LDFLAGS="-L/usr/local/opt/zlib/lib"
-export CPPFLAGS="-I/usr/local/opt/zlib/include"
 
-#set -g fish_user_paths "/usr/local/opt/bzip2/bin" $fish_user_paths
-
-#export LDFLAGS="-L/usr/local/opt/bzip2/lib"
-#export CPPFLAGS="-I/usr/local/opt/bzip2/include"
+if test -d ~/.config/fish/local.fish
+   source ~/.config/fish/local.fish
+end

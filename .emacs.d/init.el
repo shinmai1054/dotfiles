@@ -5,7 +5,8 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(package-selected-packages '(highlight-indent-guides zenburn-theme rainbow-delimiters)))
+ '(package-selected-packages
+   '(company-go go-mode highlight-indent-guides zenburn-theme rainbow-delimiters)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -20,12 +21,13 @@
 (setq package-list
       '(zenburn-theme
 	rainbow-delimiters
-	highlight-indent-guides))
+        ;;highlight-indent-guides
+        ))
 
 ;; package-archivesを上書き
 (setq package-archives
       '(("melpa" . "https://melpa.org/packages/")
-        ;; ("melpa-stable" . "https://stable.melpa.org/packages/")
+        ;;("melpa-stable" . "https://stable.melpa.org/packages/")
         ("org" . "https://orgmode.org/elpa/")
         ("gnu" . "https://elpa.gnu.org/packages/")))
 
@@ -118,14 +120,14 @@
 
 
 ;; インデントを強調表示する
-(require 'highlight-indent-guides)
-(add-hook 'prog-mode-hook 'highlight-indent-guides-mode)
-(add-hook 'yaml-mode-hook 'highlight-indent-guides-mode)
-(add-hook 'text-mode-hook 'highlight-indent-guides-mode)
+;;(require 'highlight-indent-guides)
+;;(add-hook 'prog-mode-hook 'highlight-indent-guides-mode)
+;;(add-hook 'yaml-mode-hook 'highlight-indent-guides-mode)
+;;(add-hook 'text-mode-hook 'highlight-indent-guides-mode)
 
-(setq highlight-indent-guides-auto-enabled nil)
-(setq highlight-indent-guides-method 'character)
-(setq highlight-indent-guides-responsive t)
+;;(setq highlight-indent-guides-auto-enabled nil)
+;;(setq highlight-indent-guides-method 'character)
+;;(setq highlight-indent-guides-responsive t)
 ;;(setq highlight-indent-guides-character ?\|)
 
 ;; 起動時の画面を表示しない
