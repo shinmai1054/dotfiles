@@ -57,6 +57,5 @@ set -g theme_title_display_process yes
 set -g theme_date_format "+%m/%d %H:%M:%S"
 
 
-if test -d ~/.config/fish/local.fish
-   source ~/.config/fish/local.fish
-end
+source ~/.config/fish/local.fish
+
