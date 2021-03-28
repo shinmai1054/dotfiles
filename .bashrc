@@ -98,7 +98,7 @@ alias l='ls -CF'
 
 cd ()
 {
-    builtin cd -lF "$@" && pwd && ls
+    builtin cd "$@" && pwd && ls -lF
 }
 
 # Add an "alert" alias for long running commands.  Use like so:
