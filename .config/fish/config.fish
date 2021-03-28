@@ -57,5 +57,8 @@ set -g theme_title_display_process yes
 set -g theme_date_format "+%m/%d %H:%M:%S"
 
 
-source ~/.config/fish/local.fish
+if test -f ~/.config/fish/local.fish
+   source ~/.config/fish/local.fish
+end
 
+set -U fish_user_paths (echo $fish_user_paths | tr ' ' '\n' | sort -u)
