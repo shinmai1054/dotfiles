@@ -16,5 +16,6 @@
 !/.config/fish/fishfile
 !/.emacs.d
 !/.emacs.d/init.el
+!/.tmux.conf
 !/.vimrc
 !/.zshrc

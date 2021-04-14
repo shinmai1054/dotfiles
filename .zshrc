@@ -1,19 +1,20 @@
+# .zshrc
 # -----------------------------
 # General
 # -----------------------------
 # 色を使用
 autoload -Uz colors ; colors
 
-# エディタをvimに設定
+# エディタをemacsに設定
 export EDITOR=emacs
 
 # Ctrl+Dでログアウトしてしまうことを防ぐ
 #setopt IGNOREEOF
 
-#export LANGUAGE=ja_JP.UTF-8
+#export LC_CTYPE=ja_JP.UTF-8
 #export LANG=ja_JP.UTF-8
 #export LC_ALL=ja_JP.UTF-8
-export LANG=en_US.UTF-8
+#export LANG=en_US.UTF-8
 
 # cdした際のディレクトリをディレクトリスタックへ自動追加
 setopt auto_pushd
@@ -35,7 +36,7 @@ setopt extended_glob
 
 # cdコマンドを省略して、ディレクトリ名のみの入力で移動
 setopt auto_cd
-function chpwd() { ls }
+function chpwd() { ls -l }
 
 # コマンドラインがどのように展開され実行されたかを表示するようになる
 #setopt xtrace
@@ -91,6 +92,9 @@ setopt noautoremoveslash
 
 # rsysncでsshを使用する
 export RSYNC_RSH=ssh
+
+# zsh-autosuggestions
+ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=white,bg=black"
 
 # その他
 #umask 022
@@ -241,6 +245,16 @@ alias reload="source ~/.zshrc"
 
 alias ifconfig="/sbin/ifconfig"
 
+
+# -----------------------------
+# TMUX読み込み
+# -----------------------------
+if [[ -e $HOME/.tmux.sh ]]; then
+    source $HOME/.tmux.sh
+fi
+
+
+
 # -----------------------------
 # Plugin
 # -----------------------------
@@ -260,6 +274,12 @@ zplug "zsh-users/zsh-syntax-highlighting", defer:2
 zplug "b4b4r07/enhancd", use:init.sh
 #zplug "junegunn/fzf-bin", as:command, from:gh-r, file:fzf
 
+
+if [[ -e $HOME/.zsh_local.sh ]]; then
+    source $HOME/.zsh_local.sh
+fi
+
+
 # インストールしていないプラグインをインストール
 if ! zplug check --verbose; then
   printf "Install? [y/N]: "
@@ -270,8 +290,3 @@ fi
 
 # コマンドをリンクして、PATH に追加し、プラグインは読み込む
 zplug load
-
-# zsh-autosuggestions
-ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=white,bg=black"
-
-

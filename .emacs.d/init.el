@@ -5,14 +5,17 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(display-time-mode t)
  '(package-selected-packages
-   '(company-go go-mode highlight-indent-guides zenburn-theme rainbow-delimiters)))
+   (quote
+    (company-go go-mode highlight-indent-guides zenburn-theme rainbow-delimiters)))
+ '(tool-bar-mode nil))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- )
+ '(default ((t (:family "DejaVu Sans Mono" :foundry "PfEd" :slant normal :weight normal :height 105 :width normal)))))
 
 
 (require 'package)
@@ -143,9 +146,9 @@
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
 
 ;; iswitchbを使う（C-xbによるバッファ選択が進化）
-(iswitchb-mode 1)
+;;(iswitchb-mode 1)
 ;; iswitchbの際に無視するバッファリスト
-(setq iswitchb-buffer-ignore (append iswitchb-buffer-ignore '("*Messages*" "*scratch*" "*Completions*" "*Kill Ring*")))
+;;(setq iswitchb-buffer-ignore (append iswitchb-buffer-ignore '("*Messages*" "*scratch*" "*Completions*" "*Kill Ring*")))
 
 ;; C-aで行の本当に先頭ではなく，行の非空白文字の先頭へ
 (defun back-to-indentation-or-beginning ()
@@ -153,3 +156,42 @@
   (if (= (point) (save-excursion (back-to-indentation) (point)))
     (beginning-of-line) (back-to-indentation)))
 (global-set-key "\C-a" 'back-to-indentation-or-beginning)
+
+;; line number
+(global-linum-mode t)
+(setq linum-format "%4d|")
+
+;; kakko auto nyuryoku
+(electric-pair-mode 1)
+
+;; auto-complete
+(add-to-list 'load-path "~/.emacs.d/popup-el")
+(load "popup")
+(add-to-list 'load-path "~/.emacs.d/auto-complete")
+(load "auto-complete")
+(require 'auto-complete-config)
+(ac-config-default)
+(ac-set-trigger-key "TAB")
+(setq ac-use-menu-map t)
+(setq ac-delay 0.05)
+(setq ac-auto-show-menu 0.05)
+
+;; yes or no -> y or n
+(defalias 'yes-or-no-p 'y-or-n-p)
+
+;;;
+;;; General
+;;;
+(setq inhibit-startup-message t)
+(mouse-wheel-mode)
+(tool-bar-mode 0)
+(if (not window-system) (menu-bar-mode 0))
+;;;
+;;; Anthy on Emacs
+;;;
+(setq default-input-method "japanese-egg-anthy")
+(global-set-key "\C-o" 'toggle-input-method)
+
+(prefer-coding-system 'utf-8)
+(setq coding-system-for-read 'utf-8)
+(setq coding-system-for-write 'utf-8)
