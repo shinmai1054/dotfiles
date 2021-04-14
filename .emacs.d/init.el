@@ -1,111 +1,18 @@
 ;; ~/.emacs.d/init.el
 
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(display-time-mode t)
- '(package-selected-packages
-   (quote
-    (company-go go-mode highlight-indent-guides zenburn-theme rainbow-delimiters)))
- '(tool-bar-mode nil))
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(default ((t (:family "DejaVu Sans Mono" :foundry "PfEd" :slant normal :weight normal :height 105 :width normal)))))
-
-
-(require 'package)
-
-;; インストールするパッケージ
-(setq package-list
-      '(zenburn-theme
-	rainbow-delimiters
-        ;;highlight-indent-guides
-        ))
-
-;; package-archivesを上書き
-(setq package-archives
-      '(("melpa" . "https://melpa.org/packages/")
-        ;;("melpa-stable" . "https://stable.melpa.org/packages/")
-        ("org" . "https://orgmode.org/elpa/")
-        ("gnu" . "https://elpa.gnu.org/packages/")))
-
-;; 初期化
-(package-initialize)
-
-; fetch the list of packages available
-(unless package-archive-contents
-  (package-refresh-contents))
-
-; install the missing packages
-(dolist (package package-list)
-  (unless (package-installed-p package)
-    (package-install package)))
-
-
-;; Theme
-(load-theme 'zenburn t)
-(if (null window-system)
-  (set-face-background 'default "unspecified-bg")
-)
-
-
-;; display line numbers
-(if (version<= "26.0.50" emacs-version)
+;;; ----------------------------
+;;; ローカルファイル読み込み
+;;; ----------------------------
+(if (file-exists-p "~/.local/dotfiles/init.el")
     (progn
-      (global-display-line-numbers-mode)
-      (defun display-line-numbers-color-on-after-init (frame)
-	"Hook function executed after FRAME is generated."
-        (unless (display-graphic-p frame)
-          (set-face-background
-           'line-number
-           (plist-get base16-solarized-dark-colors :base01))))
-      (add-hook 'after-make-frame-functions
-                (lambda (frame)
-                  (display-line-numbers-color-on-after-init frame)))
-      ))
+      (print "Load local file")
+      (load "~/.local/dotfiles/init.el")))
 
-
-;; rainbow-delimiters を使うための設定
-(require 'rainbow-delimiters)
-;(add-hook 'prog-mode-hook 'rainbow-delimiters-mode)
-
-;; 括弧の色を強調する設定
-;(require 'cl-lib)
-;(require 'color)
-;(defun rainbow-delimiters-using-stronger-colors ()
-;  (interactive)
-;  (cl-loop
-;   for index from 1 to rainbow-delimiters-max-face-count
-;   do
-;   (let ((face (intern (format "rainbow-delimiters-depth-%d-face" index))))
-;    (cl-callf color-saturate-name (face-foreground face) 30))))
-;(add-hook 'emacs-startup-hook 'rainbow-delimiters-using-stronger-colors)
-
-;; 抵抗のカラーコード風
-(require 'cl-lib)
-(require 'color)
-
-(rainbow-delimiters-mode 1)
-(setq rainbow-delimiters-outermost-only-face-count 1)
-
-(set-face-foreground 'rainbow-delimiters-depth-1-face "#9a4040")
-(set-face-foreground 'rainbow-delimiters-depth-2-face "#ff5e5e")
-(set-face-foreground 'rainbow-delimiters-depth-3-face "#ffaa77")
-(set-face-foreground 'rainbow-delimiters-depth-4-face "#dddd77")
-(set-face-foreground 'rainbow-delimiters-depth-5-face "#80ee80")
-(set-face-foreground 'rainbow-delimiters-depth-6-face "#66bbff")
-(set-face-foreground 'rainbow-delimiters-depth-7-face "#da6bda")
-(set-face-foreground 'rainbow-delimiters-depth-8-face "#afafaf")
-(set-face-foreground 'rainbow-delimiters-depth-9-face "#f0f0f0")
-
-;; prog-mode で有効にする
-(add-hook 'prog-mode-hook 'rainbow-delimiters-mode)
-
+;;; ----------------------------
+;;; General
+;;; ----------------------------
+;; yes or no -> y or n
+(defalias 'yes-or-no-p 'y-or-n-p)
 
 ;; バックアップファイルをまとめる
 (setq backup-directory-alist '((".*" . "~/.emacs.d/backups")))
@@ -120,18 +27,6 @@
 ;; 保存の間隔
 (setq auto-save-timeout 10)     ;; 秒   (デフォルト : 30)
 (setq auto-save-interval 100)   ;; 打鍵 (デフォルト : 300)
-
-
-;; インデントを強調表示する
-;;(require 'highlight-indent-guides)
-;;(add-hook 'prog-mode-hook 'highlight-indent-guides-mode)
-;;(add-hook 'yaml-mode-hook 'highlight-indent-guides-mode)
-;;(add-hook 'text-mode-hook 'highlight-indent-guides-mode)
-
-;;(setq highlight-indent-guides-auto-enabled nil)
-;;(setq highlight-indent-guides-method 'character)
-;;(setq highlight-indent-guides-responsive t)
-;;(setq highlight-indent-guides-character ?\|)
 
 ;; 起動時の画面を表示しない
 (setq inhibit-startup-message t)
@@ -157,34 +52,136 @@
     (beginning-of-line) (back-to-indentation)))
 (global-set-key "\C-a" 'back-to-indentation-or-beginning)
 
-;; line number
-(global-linum-mode t)
-(setq linum-format "%4d|")
-
-;; kakko auto nyuryoku
+;; 自動カッコ入力
 (electric-pair-mode 1)
 
+;; display line numbers
+(if (version<= "26.0.50" emacs-version)
+    (progn
+      (global-display-line-numbers-mode)
+      (defun display-line-numbers-color-on-after-init (frame)
+	"Hook function executed after FRAME is generated."
+        (unless (display-graphic-p frame)
+          (set-face-background
+           'line-number
+           (plist-get base16-solarized-dark-colors :base01))))
+      (add-hook 'after-make-frame-functions
+                (lambda (frame)
+                  (display-line-numbers-color-on-after-init frame)))
+      )
+  (progn
+    (global-linum-mode t)
+    (setq linum-format "%4d|")))
+
+
+
+;;; ----------------------------
+;;; Package
+;;; ----------------------------
+(require 'package)
+;; インストールするパッケージ
+(setq package-list
+      '(zenburn-theme
+	rainbow-delimiters
+        ;;highlight-indent-guides
+        company
+        neotree
+        all-the-icons
+        ))
+;; package-archivesを上書き
+(setq package-archives
+      '(("melpa" . "https://melpa.org/packages/")
+        ;;("melpa-stable" . "https://stable.melpa.org/packages/")
+        ("org" . "https://orgmode.org/elpa/")
+        ("gnu" . "https://elpa.gnu.org/packages/")))
+;; 初期化
+(package-initialize)
+
+; fetch the list of packages available
+(unless package-archive-contents
+  (package-refresh-contents))
+
+; install the missing packages
+(dolist (package package-list)
+  (unless (package-installed-p package)
+    (package-install package)))
+
+
+;; zenburn Theme
+(load-theme 'zenburn t)
+(if (null window-system)
+  (set-face-background 'default "unspecified-bg")
+)
+
+;;; rainbow-delimiters
+(require 'rainbow-delimiters)
+;;(add-hook 'prog-mode-hook 'rainbow-delimiters-mode)
+
+;; 抵抗のカラーコード風
+(require 'cl-lib)
+(require 'color)
+
+(rainbow-delimiters-mode 1)
+(setq rainbow-delimiters-outermost-only-face-count 1)
+
+(set-face-foreground 'rainbow-delimiters-depth-1-face "#9a4040")
+(set-face-foreground 'rainbow-delimiters-depth-2-face "#ff5e5e")
+(set-face-foreground 'rainbow-delimiters-depth-3-face "#ffaa77")
+(set-face-foreground 'rainbow-delimiters-depth-4-face "#dddd77")
+(set-face-foreground 'rainbow-delimiters-depth-5-face "#80ee80")
+(set-face-foreground 'rainbow-delimiters-depth-6-face "#66bbff")
+(set-face-foreground 'rainbow-delimiters-depth-7-face "#da6bda")
+(set-face-foreground 'rainbow-delimiters-depth-8-face "#afafaf")
+(set-face-foreground 'rainbow-delimiters-depth-9-face "#f0f0f0")
+
+;; prog-mode で有効にする
+(add-hook 'prog-mode-hook 'rainbow-delimiters-mode)
+
+;;; インデントを強調表示する
+;;(require 'highlight-indent-guides)
+;;(add-hook 'prog-mode-hook 'highlight-indent-guides-mode)
+;;(add-hook 'yaml-mode-hook 'highlight-indent-guides-mode)
+;;(add-hook 'text-mode-hook 'highlight-indent-guides-mode)
+
+;;(setq highlight-indent-guides-auto-enabled nil)
+;;(setq highlight-indent-guides-method 'character)
+;;(setq highlight-indent-guides-responsive t)
+;;(setq highlight-indent-guides-character ?\|)
+
+
 ;; auto-complete
-(add-to-list 'load-path "~/.emacs.d/popup-el")
-(load "popup")
-(add-to-list 'load-path "~/.emacs.d/auto-complete")
-(load "auto-complete")
-(require 'auto-complete-config)
-(ac-config-default)
-(ac-set-trigger-key "TAB")
-(setq ac-use-menu-map t)
-(setq ac-delay 0.05)
-(setq ac-auto-show-menu 0.05)
+;; (add-to-list 'load-path "~/.emacs.d/popup-el")
+;; (load "popup")
+;; (add-to-list 'load-path "~/.emacs.d/auto-complete")
+;; (load "auto-complete")
+;; (require 'auto-complete-config)
+;; (ac-config-default)
+;; (ac-set-trigger-key "TAB")
+;; (setq ac-use-menu-map t)
+;; (setq ac-delay 0.05)
+;; (setq ac-auto-show-menu 0.05)
 
-;; yes or no -> y or n
-(defalias 'yes-or-no-p 'y-or-n-p)
+;;; インテリセンス
+(require 'company)
+(global-company-mode) ; 全バッファで有効にする
+(setq company-transformers '(company-sort-by-backend-importance)) ;; ソート順
+(setq company-idle-delay 0) ; デフォルトは0.5
+(setq company-minimum-prefix-length 3) ; デフォルトは4
+(setq company-selection-wrap-around t) ; 候補の一番下でさらに下に行こうとすると一番上に戻る
+(setq completion-ignore-case t)
+(setq company-dabbrev-downcase nil)
+(global-set-key (kbd "C-M-i") 'company-complete)
+(define-key company-active-map (kbd "C-n") 'company-select-next) ;; C-n, C-pで補完候補を次/前の候補を選択
+(define-key company-active-map (kbd "C-p") 'company-select-previous)
+(define-key company-search-map (kbd "C-n") 'company-select-next)
+(define-key company-search-map (kbd "C-p") 'company-select-previous)
+(define-key company-active-map (kbd "C-s") 'company-filter-candidates) ;; C-sで絞り込む
+(define-key company-active-map (kbd "C-i") 'company-complete-selection) ;; TABで候補を設定
+(define-key company-active-map [tab] 'company-complete-selection) ;; TABで候補を設定
+(define-key company-active-map (kbd "C-f") 'company-complete-selection) ;; C-fで候補を設定
+(define-key emacs-lisp-mode-map (kbd "C-M-i") 'company-complete) ;; 各種メジャーモードでも C-M-iで company-modeの補完を使う
 
-;;;
-;;; Anthy on Emacs
-;;;
-(setq default-input-method "japanese-egg-anthy")
-(global-set-key "\C-o" 'toggle-input-method)
-
-(prefer-coding-system 'utf-8)
-(setq coding-system-for-read 'utf-8)
-(setq coding-system-for-write 'utf-8)
+;;; neotree
+(require 'neotree)
+(global-set-key [f8] 'neotree-toggle)
+(setq neo-theme (if (display-graphic-p) 'icons 'arrow))

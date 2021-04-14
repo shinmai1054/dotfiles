@@ -11,10 +11,11 @@ export EDITOR=emacs
 # Ctrl+Dでログアウトしてしまうことを防ぐ
 #setopt IGNOREEOF
 
-#export LC_CTYPE=ja_JP.UTF-8
+#export LC_TIME=ja_JP.UTF-8
 #export LANG=ja_JP.UTF-8
 #export LC_ALL=ja_JP.UTF-8
 #export LANG=en_US.UTF-8
+#export TZ="Asia/Tokyo"
 
 # cdした際のディレクトリをディレクトリスタックへ自動追加
 setopt auto_pushd
@@ -275,8 +276,8 @@ zplug "b4b4r07/enhancd", use:init.sh
 #zplug "junegunn/fzf-bin", as:command, from:gh-r, file:fzf
 
 
-if [[ -e $HOME/.zsh_local.sh ]]; then
-    source $HOME/.zsh_local.sh
+if [[ -e $HOME/.local/dotfiles/.zshrc ]]; then
+    source $HOME/.local/dotfiles/.zshrc
 fi
 
 
