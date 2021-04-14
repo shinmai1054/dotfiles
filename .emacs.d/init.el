@@ -180,13 +180,6 @@
 (defalias 'yes-or-no-p 'y-or-n-p)
 
 ;;;
-;;; General
-;;;
-(setq inhibit-startup-message t)
-(mouse-wheel-mode)
-(tool-bar-mode 0)
-(if (not window-system) (menu-bar-mode 0))
-;;;
 ;;; Anthy on Emacs
 ;;;
 (setq default-input-method "japanese-egg-anthy")
