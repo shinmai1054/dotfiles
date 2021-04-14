@@ -95,7 +95,7 @@ setopt noautoremoveslash
 export RSYNC_RSH=ssh
 
 # zsh-autosuggestions
-ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=white,bg=black"
+#ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=white,bg=black"
 
 # その他
 #umask 022

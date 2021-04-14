@@ -87,6 +87,7 @@
         company
         neotree
         all-the-icons
+        yatex
         ))
 ;; package-archivesを上書き
 (setq package-archives
@@ -185,3 +186,19 @@
 (require 'neotree)
 (global-set-key [f8] 'neotree-toggle)
 (setq neo-theme (if (display-graphic-p) 'icons 'arrow))
+
+;;; yatex
+(require 'yatex)
+(setq auto-mode-alist
+      (append '(("\\.tex$" . yatex-mode)
+                ("\\.ltx$" . yatex-mode)
+                ("\\.cls$" . yatex-mode)
+                ("\\.sty$" . yatex-mode)
+                ("\\.clo$" . yatex-mode)
+                ("\\.bbl$" . yatex-mode)) auto-mode-alist))
+(setq YaTeX-kanji-code 4)
+(setq tex-command "platex")
+(setq YaTeX-dvipdf-command "dvipdfmx")
+(add-hook 'yatex-mode-hook
+          '(lambda ()
+             (auto-fill-mode -1)))
