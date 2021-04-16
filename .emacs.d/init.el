@@ -150,37 +150,37 @@
 ;;(setq highlight-indent-guides-character ?\|)
 
 
-;; auto-complete
-;; (add-to-list 'load-path "~/.emacs.d/popup-el")
-;; (load "popup")
-;; (add-to-list 'load-path "~/.emacs.d/auto-complete")
-;; (load "auto-complete")
-;; (require 'auto-complete-config)
-;; (ac-config-default)
-;; (ac-set-trigger-key "TAB")
-;; (setq ac-use-menu-map t)
-;; (setq ac-delay 0.05)
-;; (setq ac-auto-show-menu 0.05)
+;;auto-complete
+(add-to-list 'load-path "~/.emacs.d/popup-el")
+(load "popup")
+(add-to-list 'load-path "~/.emacs.d/auto-complete")
+(load "auto-complete")
+(require 'auto-complete-config)
+(ac-config-default)
+(ac-set-trigger-key "TAB")
+(setq ac-use-menu-map t)
+(setq ac-delay 0.05)
+(setq ac-auto-show-menu 0.05)
 
 ;;; インテリセンス
-(require 'company)
-(global-company-mode) ; 全バッファで有効にする
-(setq company-transformers '(company-sort-by-backend-importance)) ;; ソート順
-(setq company-idle-delay 0) ; デフォルトは0.5
-(setq company-minimum-prefix-length 3) ; デフォルトは4
-(setq company-selection-wrap-around t) ; 候補の一番下でさらに下に行こうとすると一番上に戻る
-(setq completion-ignore-case t)
-(setq company-dabbrev-downcase nil)
-(global-set-key (kbd "C-M-i") 'company-complete)
-(define-key company-active-map (kbd "C-n") 'company-select-next) ;; C-n, C-pで補完候補を次/前の候補を選択
-(define-key company-active-map (kbd "C-p") 'company-select-previous)
-(define-key company-search-map (kbd "C-n") 'company-select-next)
-(define-key company-search-map (kbd "C-p") 'company-select-previous)
-(define-key company-active-map (kbd "C-s") 'company-filter-candidates) ;; C-sで絞り込む
-(define-key company-active-map (kbd "C-i") 'company-complete-selection) ;; TABで候補を設定
-(define-key company-active-map [tab] 'company-complete-selection) ;; TABで候補を設定
-(define-key company-active-map (kbd "C-f") 'company-complete-selection) ;; C-fで候補を設定
-(define-key emacs-lisp-mode-map (kbd "C-M-i") 'company-complete) ;; 各種メジャーモードでも C-M-iで company-modeの補完を使う
+;; (require 'company)
+;; (global-company-mode) ; 全バッファで有効にする
+;; (setq company-transformers '(company-sort-by-backend-importance)) ;; ソート順
+;; (setq company-idle-delay 0) ; デフォルトは0.5
+;; (setq company-minimum-prefix-length 3) ; デフォルトは4
+;; (setq company-selection-wrap-around t) ; 候補の一番下でさらに下に行こうとすると一番上に戻る
+;; (setq completion-ignore-case t)
+;; (setq company-dabbrev-downcase nil)
+;; (global-set-key (kbd "C-M-i") 'company-complete)
+;; (define-key company-active-map (kbd "C-n") 'company-select-next) ;; C-n, C-pで補完候補を次/前の候補を選択
+;; (define-key company-active-map (kbd "C-p") 'company-select-previous)
+;; (define-key company-search-map (kbd "C-n") 'company-select-next)
+;; (define-key company-search-map (kbd "C-p") 'company-select-previous)
+;; (define-key company-active-map (kbd "C-s") 'company-filter-candidates) ;; C-sで絞り込む
+;; (define-key company-active-map (kbd "C-i") 'company-complete-selection) ;; TABで候補を設定
+;; (define-key company-active-map [tab] 'company-complete-selection) ;; TABで候補を設定
+;; (define-key company-active-map (kbd "C-f") 'company-complete-selection) ;; C-fで候補を設定
+;; (define-key emacs-lisp-mode-map (kbd "C-M-i") 'company-complete) ;; 各種メジャーモードでも C-M-iで company-modeの補完を使う
 
 ;;; neotree
 (require 'neotree)
@@ -202,3 +202,25 @@
 (add-hook 'yatex-mode-hook
           '(lambda ()
              (auto-fill-mode -1)))
+
+;;;
+;;; その他
+;;;
+
+;; 1行上下に移動
+(defun move-line-up ()
+  "Move up the current line."
+  (interactive)
+  (transpose-lines 1)
+  (forward-line -2)
+  (indent-according-to-mode))
+(global-set-key [(meta up)] 'move-line-up)
+
+(defun move-line-down ()
+  "Move down the current line."
+  (interactive)
+  (forward-line 1)
+  (transpose-lines 1)
+  (forward-line -1)
+  (indent-according-to-mode))
+(global-set-key [(meta down)] 'move-line-down)

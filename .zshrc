@@ -259,35 +259,47 @@ fi
 # -----------------------------
 # Plugin
 # -----------------------------
-# zplugが無ければインストール
-if [[ ! -d ~/.zplug ]];then
-  git clone https://github.com/zplug/zplug ~/.zplug
+# zinitをインストール
+if [[ ! -d ~/.zinit ]]; then
+    mkdir ~/.zinit
+    git clone https://github.com/zdharma/zinit.git ~/.zinit/bin
 fi
 
-# zplugを有効化する
-source ~/.zplug/init.zsh
+# 有効化
+source ~/.zinit/bin/zinit.zsh
+autoload -Uz _zinit
+(( ${+_comps} )) && _comps[zinit]=_zinit
 
-# プラグインList
-# zplug "ユーザー名/リポジトリ名", タグ
-zplug "zsh-users/zsh-completions"
-zplug "zsh-users/zsh-autosuggestions"
-zplug "zsh-users/zsh-syntax-highlighting", defer:2
-zplug "b4b4r07/enhancd", use:init.sh
-#zplug "junegunn/fzf-bin", as:command, from:gh-r, file:fzf
+# プラグインリスト
+zinit light zsh-users/zsh-autosuggestions
+zinit light zdharma/fast-syntax-highlighting
+
+# Ctrl+r でコマンド履歴を検索
+zinit light zdharma/history-search-multi-word
+
+# クローンしたGit作業ディレクトリで、コマンド `git open` を実行するとブラウザでGitHubが開く
+zinit light paulirish/git-open
+
+# Gitの変更状態がわかる ls。ls の代わりにコマンド `k` を実行するだけ。
+zinit light supercrabtree/k
+
+# theme
+if [[ $TERM != "linux" ]]; then
+    zinit ice pick"async.zsh" src"pure.zsh"
+    zinit light sindresorhus/pure
+fi
+
+# cdの補完
+zinit ice from"gh-r" as"program"
+zinit load junegunn/fzf-bin
+
+zinit ice wait'!0'
+zinit light "b4b4r07/enhancd"
 
 
+# -----------------------------
+# ローカルファイルの読み込み
+# -----------------------------
 if [[ -e $HOME/.local/dotfiles/.zshrc ]]; then
     source $HOME/.local/dotfiles/.zshrc
 fi
-
-
-# インストールしていないプラグインをインストール
-if ! zplug check --verbose; then
-  printf "Install? [y/N]: "
-  if read -q; then
-      echo; zplug install
-  fi
-fi
-
-# コマンドをリンクして、PATH に追加し、プラグインは読み込む
-zplug load
