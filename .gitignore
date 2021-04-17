@@ -10,12 +10,15 @@
 !/.gitignore
 !/.bashrc
 !/.bash_config
+!/setup
+!/setup/*
 !/.config
 !/.config/fish
 !/.config/fish/config.fish
-!/.config/fish/fishfile
+!/.config/fish/fish_plugins
 !/.emacs.d
 !/.emacs.d/init.el
 !/.tmux.conf
 !/.vimrc
 !/.zshrc
+!/install.sh
