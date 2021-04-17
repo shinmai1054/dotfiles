@@ -56,6 +56,11 @@ set -g theme_show_exit_status yes
 set -g theme_title_display_process yes
 set -g theme_date_format "+%m/%d %H:%M:%S"
 
+# fisher
+if type fisher > /dev/null 2>&1
+   curl -sL https://git.io/fisher | source && fisher install jorgebucaran/fisher
+   fisher update
+end
 
 if test -f ~/.config/fish/local.fish
    source ~/.config/fish/local.fish
