@@ -28,6 +28,11 @@
 (setq auto-save-timeout 10)     ;; 秒   (デフォルト : 30)
 (setq auto-save-interval 100)   ;; 打鍵 (デフォルト : 300)
 
+;; カスタムファイルの指定
+(setq custom-file "~/.emacs.d/custom.el")
+(if (file-exists-p (expand-file-name custom-file))
+    (load-file (expand-file-name custom-file)))
+
 ;; 起動時の画面を表示しない
 (setq inhibit-startup-message t)
 
