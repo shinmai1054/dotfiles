@@ -225,17 +225,3 @@
   (forward-line -1)
   (indent-according-to-mode))
 (global-set-key [(meta down)] 'move-line-down)
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(package-selected-packages
-   (quote
-    (auto-complete zenburn-theme yatex rainbow-delimiters neotree highlight-indent-guides company all-the-icons))))
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- )
