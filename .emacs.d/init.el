@@ -60,6 +60,9 @@
 ;; 自動カッコ入力
 (electric-pair-mode 1)
 
+;; クリップボード使用
+(setq x-select-enable-clipboard t)
+
 ;; display line numbers
 (if (version<= "26.0.50" emacs-version)
     (progn
@@ -99,7 +102,8 @@
       '(("melpa" . "https://melpa.org/packages/")
         ;;("melpa-stable" . "https://stable.melpa.org/packages/")
         ("org" . "https://orgmode.org/elpa/")
-        ("gnu" . "https://elpa.gnu.org/packages/")))
+        ("gnu" . "https://elpa.gnu.org/packages/")
+        ("milk" . "http://melpa.milkbox.net/")))
 ;; 初期化
 (package-initialize)
 
@@ -221,6 +225,8 @@
   (forward-line -2)
   (indent-according-to-mode))
 (global-set-key [(meta up)] 'move-line-up)
+(global-set-key [(meta p)] 'move-line-up)
+
 
 (defun move-line-down ()
   "Move down the current line."
@@ -230,3 +236,4 @@
   (forward-line -1)
   (indent-according-to-mode))
 (global-set-key [(meta down)] 'move-line-down)
+(global-set-key [(meta n)] 'move-line-down)
