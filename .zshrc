@@ -250,9 +250,9 @@ alias ifconfig="/sbin/ifconfig"
 # -----------------------------
 # TMUX読み込み
 # -----------------------------
-if [[ -e $HOME/.tmux.sh ]]; then
-    source $HOME/.tmux.sh
-fi
+#if [[ -e $HOME/.tmux.sh ]]; then
+ #   source $HOME/.tmux.sh
+#fi
 
 
 
@@ -303,3 +303,5 @@ zinit light "b4b4r07/enhancd"
 if [[ -e $HOME/.local/dotfiles/.zshrc ]]; then
     source $HOME/.local/dotfiles/.zshrc
 fi
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh

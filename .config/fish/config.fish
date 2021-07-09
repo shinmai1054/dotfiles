@@ -1,6 +1,6 @@
 # config.fish
 
-set EDITOR emacs
+set EDITOR code
 
 if [ (uname) = 'Darwin' ]
    alias ls 'ls -G -F'
@@ -40,11 +40,7 @@ function reload
 end
 
 # pyenv
-if test -d ~/.pyenv/bin
-   fish_add_path $HOME/.pyenv/bin
-end
-
-type -q pyenv; and eval (pyenv init - | source)
+status is-login; and pyenv init --path | source
 
 # cd and ls
 function cd

@@ -23,7 +23,7 @@
 (setq delete-old-versions t)  ;; 範囲外を削除
 
 ;; 自動保存ファイルをまとめる
-(setq auto-save-file-name-transforms   '((".*" "~/.emacs.d/temp" t)))
+(setq auto-save-file-name-transforms   '((".*" "~/.emacs.d/auto-saves" t)))
 ;; 保存の間隔
 (setq auto-save-timeout 10)     ;; 秒   (デフォルト : 30)
 (setq auto-save-interval 100)   ;; 打鍵 (デフォルト : 300)
@@ -44,11 +44,6 @@
 
 ;; 保存時に自動で行末にある無駄な空白を削除
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
-
-;; iswitchbを使う（C-xbによるバッファ選択が進化）
-;;(iswitchb-mode 1)
-;; iswitchbの際に無視するバッファリスト
-;;(setq iswitchb-buffer-ignore (append iswitchb-buffer-ignore '("*Messages*" "*scratch*" "*Completions*" "*Kill Ring*")))
 
 ;; C-aで行の本当に先頭ではなく，行の非空白文字の先頭へ
 (defun back-to-indentation-or-beginning ()
@@ -160,37 +155,37 @@
 
 
 ;;auto-complete
-(require 'auto-complete)
+;;(require 'auto-complete)
 ;; (add-to-list 'load-path "~/.emacs.d/popup-el")
 ;; (load "popup")
 ;; (add-to-list 'load-path "~/.emacs.d/auto-complete")
 ;; (load "auto-complete")
 ;; (require 'auto-complete-config)
-(ac-config-default)
-(ac-set-trigger-key "TAB")
-(setq ac-use-menu-map t)
-(setq ac-delay 0.05)
-(setq ac-auto-show-menu 0.05)
+;; (ac-config-default)
+;; (ac-set-trigger-key "TAB")
+;; (setq ac-use-menu-map t)
+;; (setq ac-delay 0.05)
+;; (setq ac-auto-show-menu 0.05)
 
 ;;; インテリセンス
-;; (require 'company)
-;; (global-company-mode) ; 全バッファで有効にする
-;; (setq company-transformers '(company-sort-by-backend-importance)) ;; ソート順
-;; (setq company-idle-delay 0) ; デフォルトは0.5
-;; (setq company-minimum-prefix-length 3) ; デフォルトは4
-;; (setq company-selection-wrap-around t) ; 候補の一番下でさらに下に行こうとすると一番上に戻る
-;; (setq completion-ignore-case t)
-;; (setq company-dabbrev-downcase nil)
-;; (global-set-key (kbd "C-M-i") 'company-complete)
-;; (define-key company-active-map (kbd "C-n") 'company-select-next) ;; C-n, C-pで補完候補を次/前の候補を選択
-;; (define-key company-active-map (kbd "C-p") 'company-select-previous)
-;; (define-key company-search-map (kbd "C-n") 'company-select-next)
-;; (define-key company-search-map (kbd "C-p") 'company-select-previous)
-;; (define-key company-active-map (kbd "C-s") 'company-filter-candidates) ;; C-sで絞り込む
-;; (define-key company-active-map (kbd "C-i") 'company-complete-selection) ;; TABで候補を設定
-;; (define-key company-active-map [tab] 'company-complete-selection) ;; TABで候補を設定
-;; (define-key company-active-map (kbd "C-f") 'company-complete-selection) ;; C-fで候補を設定
-;; (define-key emacs-lisp-mode-map (kbd "C-M-i") 'company-complete) ;; 各種メジャーモードでも C-M-iで company-modeの補完を使う
+(require 'company)
+(global-company-mode) ; 全バッファで有効にする
+(setq company-transformers '(company-sort-by-backend-importance)) ;; ソート順
+(setq company-idle-delay 0) ; デフォルトは0.5
+(setq company-minimum-prefix-length 3) ; デフォルトは4
+(setq company-selection-wrap-around t) ; 候補の一番下でさらに下に行こうとすると一番上に戻る
+(setq completion-ignore-case t)
+(setq company-dabbrev-downcase nil)
+(global-set-key (kbd "C-M-i") 'company-complete)
+(define-key company-active-map (kbd "C-n") 'company-select-next) ;; C-n, C-pで補完候補を次/前の候補を選択
+(define-key company-active-map (kbd "C-p") 'company-select-previous)
+(define-key company-search-map (kbd "C-n") 'company-select-next)
+(define-key company-search-map (kbd "C-p") 'company-select-previous)
+(define-key company-active-map (kbd "C-s") 'company-filter-candidates) ;; C-sで絞り込む
+(define-key company-active-map (kbd "C-i") 'company-complete-selection) ;; TABで候補を設定
+(define-key company-active-map [tab] 'company-complete-selection) ;; TABで候補を設定
+(define-key company-active-map (kbd "C-f") 'company-complete-selection) ;; C-fで候補を設定
+(define-key emacs-lisp-mode-map (kbd "C-M-i") 'company-complete) ;; 各種メジャーモードでも C-M-iで company-modeの補完を使う
 
 ;;; neotree
 (require 'neotree)
