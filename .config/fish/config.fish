@@ -40,7 +40,9 @@ function reload
 end
 
 # pyenv
-status is-login; and pyenv init --path | source
+if test -d ~/.pyenv
+   status is-login; and pyenv init --path | source
+end
 
 # cd and ls
 function cd
