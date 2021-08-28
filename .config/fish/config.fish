@@ -41,7 +41,7 @@ end
 
 # pyenv
 if test -d ~/.pyenv
-   status is-login; and pyenv init --path | source
+   status is-interactive; and pyenv init --path | source
 end
 
 # cd and ls
@@ -52,6 +52,8 @@ end
 # bobthefish
 set -g theme_show_exit_status yes
 set -g theme_title_display_process yes
+set -g theme_project_dir_length 1
+set -g theme_newline_cursor yes
 set -g theme_date_format "+%m/%d %H:%M:%S"
 
 
