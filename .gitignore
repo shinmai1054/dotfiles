@@ -15,6 +15,7 @@
 !/.config
 !/.config/fish
 !/.config/fish/*.fish
+/.config/fish/local.fish
 !/.config/fish/functions/
 !/.config/fish/functions/**
 !/.config/fish/config.fish
