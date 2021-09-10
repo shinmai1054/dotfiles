@@ -15,7 +15,7 @@ else if [ (uname) = 'Linux' ]
 end
 
 alias l 'ls -a'
-alias ll 'ls -ltr'
+alias ll 'ls -l'
 alias la 'ls -la'
 alias ltr 'ls -ltr'
 
