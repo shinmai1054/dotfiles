@@ -1,11 +1,17 @@
 # config.fish
 
-set EDITOR code
+if type "code" > /dev/null 2>&1                                                                                                                                                                 09/10 22:20:35
+   set EDITOR code
+   alias v 'code .'
+else
+   set EDITOR emacs
+end
+
 
 if [ (uname) = 'Darwin' ]
-   alias ls 'ls -G -F'
+   source ~/.config/fish/macos.fish
 else if [ (uname) = 'Linux' ]
-   alias ls 'ls -F --color=auto'
+   source ~/.config/fish/linux.fish
 end
 
 alias l 'ls -a'
@@ -13,14 +19,13 @@ alias ll 'ls -ltr'
 alias la 'ls -la'
 alias ltr 'ls -ltr'
 
-alias grep 'grep --color'
+alias grep 'grep --color=auto'
 
 alias mkdir 'mkdir -p'
 alias rm 'rm -i'
 alias cp 'cp -i'
 alias mv 'mv -i'
 
-alias cot 'open -a coteditor'
 alias c 'clear'
 alias h 'history'
 
@@ -33,10 +38,29 @@ alias ... 'cd ../..'
 alias .... 'cd ../../..'
 alias ..... 'cd ../../../..'
 
-alias oc 'sudo openconnect --config=$HOME/openconnect/config v-conn.nagasaki-u.ac.jp'
+alias b 'bat'
+alias e 'emacs -nw'
+alias o 'open'
+alias p 'python3'
+alias t 'tmux'
+
+alias g 'git'
+alias ga 'git add'
+alias gd 'git diff'
+alias gs 'git status'
+alias gps 'git push'
+alias gpu 'git pull'
+alias gb 'git branch'
+alias gf 'git fetch'
+alias gcm 'git commit'
+alias gcl 'git clone'
+
+function es
+   emacs /sudo::$argv
+end
 
 function reload
-  source ~/.config/fish/config.fish
+   source ~/.config/fish/config.fish
 end
 
 # pyenv
@@ -46,7 +70,7 @@ end
 
 # cd and ls
 function cd
-  builtin cd $argv; and pwd -P; and ll
+   builtin cd $argv; and pwd -P; and ll
 end
 
 # bobthefish
