@@ -13,6 +13,12 @@ else if [ (uname) = 'Linux' ]
    source ~/.config/fish/linux.fish
 end
 
+if ! type fisher > /dev/null 2>&1
+   curl -sL https://git.io/fisher | source && fisher install jorgebucaran/fisher && fisher update \
+      && fisher install oh-my-fish/theme-bobthefish jethrokuan/z jethrokuan/fzf
+end
+
+
 alias l 'ls -a'
 alias ll 'ls -l'
 alias la 'ls -la'
@@ -79,11 +85,25 @@ set -g theme_project_dir_length 1
 set -g theme_newline_cursor yes
 set -g theme_date_format "+%m/%d %H:%M:%S"
 
+# fzf
+set -g FZF_COMPLETE 2
+set -g FZF_LEGACY_KEYBINDINGS 0
+set -g FZF_DEFAULT_OPTS "--height 40% --layout=reverse --border --inline-info"
+
+if type "fd" > /dev/null 2>&1
+   set -g FZF_ALT_C_COMMAND 'fd --type d'
+   set -g FZF_CD_COMMAND 'fd --type d'
+   set -g FZF_CD_WITH_HIDDEN_COMMAND 'fd --type d --hidden'
+   set -g FZF_OPEN_COMMAND 'fd --type f --hidden'
+   set -g FZF_FIND_FILE_COMMAND 'fd --type f --hidden'
+end
+
+if type "bat" > /dev/null 2>&1
+   set -g FZF_PREVIEW_FILE_CMD 'bat --color=always --style="numbers,changes"'
+end
 
 if test -f ~/.config/fish/local.fish
    source ~/.config/fish/local.fish
 end
 
-set -U fish_user_paths (echo $fish_user_paths | tr ' ' '\n' | sort -u)
 
-test -e {$HOME}/.iterm2_shell_integration.fish ; and source {$HOME}/.iterm2_shell_integration.fish
