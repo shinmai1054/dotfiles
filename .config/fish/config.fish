@@ -1,12 +1,11 @@
 # config.fish
 
-if type "code" > /dev/null 2>&1                                                                                                                                                                 09/10 22:20:35
+if type "code" > /dev/null 2>&1
    set EDITOR code
    alias v 'code .'
 else
    set EDITOR emacs
 end
-
 
 if [ (uname) = 'Darwin' ]
    source ~/.config/fish/macos.fish
@@ -86,3 +85,5 @@ if test -f ~/.config/fish/local.fish
 end
 
 set -U fish_user_paths (echo $fish_user_paths | tr ' ' '\n' | sort -u)
+
+test -e {$HOME}/.iterm2_shell_integration.fish ; and source {$HOME}/.iterm2_shell_integration.fish
