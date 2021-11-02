@@ -13,11 +13,6 @@ else if [ (uname) = 'Linux' ]
    source ~/.config/fish/linux.fish
 end
 
-if ! type fisher > /dev/null 2>&1
-   curl -sL https://git.io/fisher | source && fisher install jorgebucaran/fisher && fisher update \
-      && fisher install oh-my-fish/theme-bobthefish jethrokuan/z jethrokuan/fzf
-end
-
 
 alias l 'ls -a'
 alias ll 'ls -l'
