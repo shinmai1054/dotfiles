@@ -87,7 +87,7 @@
       '(zenburn-theme
 	rainbow-delimiters
         ;;highlight-indent-guides
-        auto-complete
+        company
         neotree
         all-the-icons
         yatex
