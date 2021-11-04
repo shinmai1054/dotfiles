@@ -1,4 +1,5 @@
 # fisher
-if ! type fisher > /dev/null 2>&1
-    curl -sL https://git.io/fisher | source && fisher install jorgebucaran/fisher oh-my-fish/theme-bobthefish jethrokuan/z jethrokuan/fzf
-end
+
+set packages jorgebucaran/fisher oh-my-fish/theme-bobthefish jethrokuan/z jethrokuan/fzf jorgebucaran/autopair.fish acomagu/fish-async-prompt
+
+curl -sL https://git.io/fisher | source && fisher install $packages
