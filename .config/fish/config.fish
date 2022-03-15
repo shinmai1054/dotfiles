@@ -62,8 +62,8 @@ function reload
    source ~/.config/fish/config.fish
 end
 
-if test -f ~/.config/fish/local.fish
-   source ~/.config/fish/local.fish
+if test -f ~/.config/fish/tmux.fish
+   source ~/.config/fish/tmux.fish
 end
 
 # pyenv
