@@ -41,8 +41,7 @@ alias ..... 'cd ../../../..'
 alias b 'bat'
 alias e 'emacs -nw'
 alias o 'open'
-alias p 'python3'
-alias t 'tmux'
+alias py 'python'
 
 alias g 'git'
 alias ga 'git add'
@@ -61,6 +60,10 @@ end
 
 function reload
    source ~/.config/fish/config.fish
+end
+
+if test -f ~/.config/fish/local.fish
+   source ~/.config/fish/local.fish
 end
 
 # pyenv
@@ -127,5 +130,3 @@ end
 if test -f ~/.config/fish/local.fish
    source ~/.config/fish/local.fish
 end
-
-
