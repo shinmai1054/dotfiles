@@ -14,7 +14,7 @@ function attach_tmux
 
             set reply (echo $slist | fzf)
             set num (echo $reply | cut -d: -f1)
-            echo $num
+
             if test $reply = $create_new_session
                 exec tmux new-session
             else if test (string match -r '[0-9]+' $num)
