@@ -7,7 +7,7 @@ function attach_tmux
         if not type "tmux" > /dev/null 2>&1
             echo 'Error: tmux command not found' 2>&1
         else if test -n "$TMUX"
-            echo "TMUX"
+            echo "tmux is already running."
         else if tmux has-session >/dev/null 2>&1; and tmux list-sessions | grep -qv 'attached'
             set create_new_session "Create New Session"
             set slist $create_new_session\n(tmux list-sessions | grep -v 'attached')
