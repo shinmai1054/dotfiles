@@ -304,4 +304,6 @@ if [[ -e $HOME/.local/dotfiles/.zshrc ]]; then
     source $HOME/.local/dotfiles/.zshrc
 fi
 
+
+
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
