@@ -1,12 +1,5 @@
 # config.fish
 
-if type "code" > /dev/null 2>&1
-   set EDITOR code
-   alias v 'code .'
-else
-   set EDITOR emacs
-end
-
 if [ (uname) = 'Darwin' ]
    source ~/.config/fish/macos.fish
 else if [ (uname) = 'Linux' ]
@@ -53,6 +46,14 @@ alias gb 'git branch'
 alias gf 'git fetch'
 alias gcm 'git commit'
 alias gcl 'git clone'
+
+
+if type "code" > /dev/null 2>&1
+   set EDITOR code
+   alias v 'code .'
+else
+   set EDITOR emacs
+end
 
 function es
    emacs /sudo::$argv

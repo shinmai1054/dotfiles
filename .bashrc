@@ -127,3 +127,4 @@ fi
 
 
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
+[ -d $HOME/.cargo/env ] && . "$HOME/.cargo/env"

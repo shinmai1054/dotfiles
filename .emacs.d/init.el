@@ -95,10 +95,8 @@
 ;; package-archivesを上書き
 (setq package-archives
       '(("melpa" . "https://melpa.org/packages/")
-        ;;("melpa-stable" . "https://stable.melpa.org/packages/")
         ("org" . "https://orgmode.org/elpa/")
-        ("gnu" . "https://elpa.gnu.org/packages/")
-        ("milk" . "http://melpa.milkbox.net/")))
+        ("gnu" . "https://elpa.gnu.org/packages/")))
 ;; 初期化
 (package-initialize)
 
