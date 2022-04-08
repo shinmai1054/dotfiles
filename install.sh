@@ -5,7 +5,7 @@ set -ue
 DOTPATH="$HOME/.dotfiles"
 BACKUP_PATH="$HOME/.dotbackup"
 
-GITHUB_URL="git@github.com:shinmai1054/dotfiles.git"
+GITHUB_URL="https://github.com/shinmai1054/dotfiles.git"
 
 has() {
     type "$1" > /dev/null 2>&1
