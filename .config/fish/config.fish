@@ -69,12 +69,14 @@ end
 
 # pyenv
 if test -d ~/.pyenv
-   status is-interactive; and pyenv init --path | source
+   status is-login; and pyenv init --path | source
+   status is-interactive; and pyenv init - | source
 end
 
 # cd and ls
+functions -c cd cd_fish
 function cd
-   builtin cd $argv; and pwd -P; and ll
+   cd_fish $argv; and pwd -P; and ll
 end
 
 # color
