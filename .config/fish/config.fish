@@ -55,6 +55,8 @@ else
    set EDITOR emacs
 end
 
+set SUDO_EDITOR emacs
+
 function es
    emacs /sudo::$argv
 end

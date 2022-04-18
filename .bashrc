@@ -8,6 +8,9 @@ case $- in
       *) return;;
 esac
 
+export EDITOR=emacs
+export SUDO_EDITOR=emacs
+
 # don't put duplicate lines or lines starting with space in the history.
 # See bash(1) for more options
 HISTCONTROL=ignoreboth
