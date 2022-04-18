@@ -4,9 +4,9 @@
 ;;; ローカルファイル読み込み
 ;;; ----------------------------
 (if (file-exists-p "~/.local/dotfiles/init.el")
-    (progn
-      (print "Load local file")
-      (load "~/.local/dotfiles/init.el")))
+  (progn
+    (print "Load local file")
+    (load "~/.local/dotfiles/init.el")))
 
 ;;; ----------------------------
 ;;; General
@@ -60,18 +60,18 @@
 
 ;; display line numbers
 (if (version<= "26.0.50" emacs-version)
-    (progn
-      (global-display-line-numbers-mode)
-      (defun display-line-numbers-color-on-after-init (frame)
-	"Hook function executed after FRAME is generated."
-        (unless (display-graphic-p frame)
-          (set-face-background
-           'line-number
-           (plist-get base16-solarized-dark-colors :base01))))
-      (add-hook 'after-make-frame-functions
-                (lambda (frame)
-                  (display-line-numbers-color-on-after-init frame)))
-      )
+  (progn
+    (global-display-line-numbers-mode)
+    (defun display-line-numbers-color-on-after-init (frame)
+      "Hook function executed after FRAME is generated."
+      (unless (display-graphic-p frame)
+        (set-face-background
+          'line-number
+          (plist-get base16-solarized-dark-colors :base01))))
+    (add-hook 'after-make-frame-functions
+      (lambda (frame)
+        (display-line-numbers-color-on-after-init frame)))
+  )
   (progn
     (global-linum-mode t)
     (setq linum-format "%4d|")))
@@ -84,14 +84,13 @@
 (require 'package)
 ;; インストールするパッケージ
 (setq package-list
-      '(zenburn-theme
-	rainbow-delimiters
-        ;;highlight-indent-guides
-        company
-        neotree
-        all-the-icons
-        yatex
-        ))
+  '(zenburn-theme
+    rainbow-delimiters
+    company
+    neotree
+    all-the-icons
+    yatex
+    ))
 ;; package-archivesを上書き
 (setq package-archives
       '(("melpa" . "https://melpa.org/packages/")
@@ -140,18 +139,6 @@
 ;; prog-mode で有効にする
 (add-hook 'prog-mode-hook 'rainbow-delimiters-mode)
 
-;;; インデントを強調表示する
-;;(require 'highlight-indent-guides)
-;;(add-hook 'prog-mode-hook 'highlight-indent-guides-mode)
-;;(add-hook 'yaml-mode-hook 'highlight-indent-guides-mode)
-;;(add-hook 'text-mode-hook 'highlight-indent-guides-mode)
-
-;;(setq highlight-indent-guides-auto-enabled nil)
-;;(setq highlight-indent-guides-method 'character)
-;;(setq highlight-indent-guides-responsive t)
-;;(setq highlight-indent-guides-character ?\|)
-
-
 ;;auto-complete
 ;;(require 'auto-complete)
 ;; (add-to-list 'load-path "~/.emacs.d/popup-el")
@@ -193,18 +180,16 @@
 ;;; yatex
 (require 'yatex)
 (setq auto-mode-alist
-      (append '(("\\.tex$" . yatex-mode)
-                ("\\.ltx$" . yatex-mode)
-                ("\\.cls$" . yatex-mode)
-                ("\\.sty$" . yatex-mode)
-                ("\\.clo$" . yatex-mode)
-                ("\\.bbl$" . yatex-mode)) auto-mode-alist))
+  (append '(("\\.tex$" . yatex-mode)
+            ("\\.ltx$" . yatex-mode)
+            ("\\.cls$" . yatex-mode)
+            ("\\.sty$" . yatex-mode)
+            ("\\.clo$" . yatex-mode)
+            ("\\.bbl$" . yatex-mode)) auto-mode-alist))
 (setq YaTeX-kanji-code 4)
 (setq tex-command "platex")
 (setq YaTeX-dvipdf-command "dvipdfmx")
-(add-hook 'yatex-mode-hook
-          '(lambda ()
-             (auto-fill-mode -1)))
+(add-hook 'yatex-mode-hook '(lambda () (auto-fill-mode -1)))
 
 ;;;
 ;;; その他
