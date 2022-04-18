@@ -10,8 +10,8 @@
 !/.gitignore
 !/.bashrc
 !/.bash_config
-!/setup
-!/setup/*
+!/script
+!/script/*
 !/.config
 !/.config/fish
 !/.config/fish/*.fish
