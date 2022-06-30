@@ -38,6 +38,7 @@
 
 ;; インデントTAB文字を使わない（空白文字を使う）
 (setq-default indent-tabs-mode nil)
+(setq default-tab-width 4)
 
 ;; C-kで改行文字も削除
 (setq kill-whole-line t)
@@ -76,6 +77,10 @@
     (global-linum-mode t)
     (setq linum-format "%4d|")))
 
+;; C++
+(add-hook 'c++-mode-hook
+          '(lambda()
+             (c-set-style "stroustrup")))
 
 
 ;;; ----------------------------
@@ -89,7 +94,8 @@
     company
     neotree
     all-the-icons
-    yatex
+    flycheck
+;;    yatex
     ))
 ;; package-archivesを上書き
 (setq package-archives
@@ -156,7 +162,7 @@
 (require 'company)
 (global-company-mode) ; 全バッファで有効にする
 (setq company-transformers '(company-sort-by-backend-importance)) ;; ソート順
-(setq company-idle-delay 0) ; デフォルトは0.5
+(setq company-idle-delay 0.5) ; デフォルトは0.5
 (setq company-minimum-prefix-length 3) ; デフォルトは4
 (setq company-selection-wrap-around t) ; 候補の一番下でさらに下に行こうとすると一番上に戻る
 (setq completion-ignore-case t)
@@ -178,18 +184,21 @@
 (setq neo-theme (if (display-graphic-p) 'icons 'arrow))
 
 ;;; yatex
-(require 'yatex)
-(setq auto-mode-alist
-  (append '(("\\.tex$" . yatex-mode)
-            ("\\.ltx$" . yatex-mode)
-            ("\\.cls$" . yatex-mode)
-            ("\\.sty$" . yatex-mode)
-            ("\\.clo$" . yatex-mode)
-            ("\\.bbl$" . yatex-mode)) auto-mode-alist))
-(setq YaTeX-kanji-code 4)
-(setq tex-command "platex")
-(setq YaTeX-dvipdf-command "dvipdfmx")
-(add-hook 'yatex-mode-hook '(lambda () (auto-fill-mode -1)))
+;; (require 'yatex)
+;; (setq auto-mode-alist
+;;   (append '(("\\.tex$" . yatex-mode)
+;;             ("\\.ltx$" . yatex-mode)
+;;             ("\\.cls$" . yatex-mode)
+;;             ("\\.sty$" . yatex-mode)
+;;             ("\\.clo$" . yatex-mode)
+;;             ("\\.bbl$" . yatex-mode)) auto-mode-alist))
+;; (setq YaTeX-kanji-code 4)
+;; (setq tex-command "platex")
+;; (setq YaTeX-dvipdf-command "dvipdfmx")
+;; (add-hook 'yatex-mode-hook '(lambda () (auto-fill-mode -1)))
+
+;;; flycheck
+(global-flycheck-mode)
 
 ;;;
 ;;; その他
