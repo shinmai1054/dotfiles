@@ -46,7 +46,7 @@ alias gb 'git branch'
 alias gf 'git fetch'
 alias gcm 'git commit'
 alias gcl 'git clone'
-
+alias emacs 'emacs -nw'
 
 if type "code" > /dev/null 2>&1
    set EDITOR code
