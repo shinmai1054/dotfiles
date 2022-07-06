@@ -8,6 +8,8 @@ case $- in
       *) return;;
 esac
 
+alias emacs='emacs -nw'
+
 export EDITOR=emacs
 export SUDO_EDITOR=emacs
 

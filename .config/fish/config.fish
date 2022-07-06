@@ -1,12 +1,5 @@
 # config.fish
 
-if [ (uname) = 'Darwin' ]
-   source ~/.config/fish/macos.fish
-else if [ (uname) = 'Linux' ]
-   source ~/.config/fish/linux.fish
-end
-
-
 alias l 'ls -a'
 alias ll 'ls -l'
 alias la 'ls -la'
@@ -47,6 +40,12 @@ alias gf 'git fetch'
 alias gcm 'git commit'
 alias gcl 'git clone'
 alias emacs 'emacs -nw'
+
+if [ (uname) = 'Darwin' ]
+   source ~/.config/fish/macos.fish
+else if [ (uname) = 'Linux' ]
+   source ~/.config/fish/linux.fish
+end
 
 if type "code" > /dev/null 2>&1
    set EDITOR code
