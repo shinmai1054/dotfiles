@@ -85,6 +85,7 @@ set -g hydro_color_git green
 set -g hydro_color_prompt brpurple
 set -g hydro_color_duration 6272a4
 set -g hydro_multiline true
+set -g hydro_fetch true
 
 # fzf
 set -g FZF_COMPLETE 2
