@@ -40,7 +40,7 @@ alias gf 'git fetch'
 alias gcm 'git commit'
 alias gcl 'git clone'
 alias emacs 'emacs -nw'
-
+alias sudoedit 'SUDO_EDITOR=emacs sudo -e'
 if [ (uname) = 'Darwin' ]
    source ~/.config/fish/macos.fish
 else if [ (uname) = 'Linux' ]
@@ -54,7 +54,6 @@ else
    set EDITOR 'emacs -nw'
 end
 
-set SUDO_EDITOR 'emacs -nw'
 
 function es
    emacs /sudo::$argv
