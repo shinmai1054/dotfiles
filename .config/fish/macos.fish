@@ -11,6 +11,7 @@ alias f 'open -a Finder ./'
 alias i 'brew install'
 alias ug 'brew upgrade'
 alias copy 'pbcopy'
+alias kb 'open /System/Library/CoreServices/KeyboardSetupAssistant.app'
 
 if type trash > /dev/null 2>&1
     alias rm 'trash -F'
